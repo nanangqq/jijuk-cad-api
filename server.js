@@ -12,7 +12,7 @@ const startServer = async () => {
     const router = new Router()
     router.use('/api', api.routes())
 
-    const PORT = process.env.PORT || 4000
+    const PORT = process.env.PORT || 8000
 
     let HOSTNAME
     if (os.platform() == 'linux') {
