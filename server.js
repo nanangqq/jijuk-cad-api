@@ -4,12 +4,14 @@ import { exec } from 'child_process'
 import Router from 'koa-router'
 import mount from 'koa-mount'
 import serve from 'koa-static'
+import bodyParser from 'koa-bodyparser'
 
 import api from './api'
 
 const startServer = async () => {
     const app = new Koa()
     const router = new Router()
+    app.use(bodyParser())
     router.use('/api', api.routes())
 
     const PORT = process.env.PORT || 8000
