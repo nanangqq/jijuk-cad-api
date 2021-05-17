@@ -15,11 +15,12 @@ api.get('/test', async ctx => {
 api.post('/land', async ctx => {
     const { lat, lng } = ctx.request.body
     const res = await executeQ(
-        `select st_asgeojson(geometry) from seoul_jijuk_0501_4326 
+        `select st_asgeojson(geometry)::jsonb, "A1" as pnu from seoul_jijuk_0501_4326 
         where st_intersects(geometry, st_pointfromtext('POINT (${lng} ${lat})', 4326))`
     )
     // console.log(res.rows)
-    ctx.body = res.rows.map(row => row.st_asgeojson)
+    // ctx.body = res.rows.map(row => row.st_asgeojson)
+    ctx.body = res.rows
 })
 
 api.get('/save', async ctx => {
