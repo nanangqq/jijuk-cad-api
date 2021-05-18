@@ -31,7 +31,13 @@ const startServer = async () => {
 
     const static_pages = new Koa()
     static_pages.use(serve('../jijuk-cad/build'))
-    app.use(mount('/', static_pages)).use(router.routes())
+
+    const files = new Koa()
+    files.use(serve('../out'))
+
+    app.use(mount('/', static_pages))
+        .use(mount('/jj_out/', files))
+        .use(router.routes())
 
     app.listen(PORT, HOSTNAME, () => {
         console.log('==> 🌎  Listening on port %s.', PORT)

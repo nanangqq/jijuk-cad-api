@@ -23,13 +23,14 @@ api.post('/land', async ctx => {
     ctx.body = res.rows
 })
 
-api.get('/save', async ctx => {
-    const pnus = ['1168010600109450010', '1168010600109480000']
+api.post('/download', async ctx => {
+    // const pnus = ['1168010600109450010', '1168010600109480000']
+    const pnus = ctx.request.body
     const res = await Axios.post(
         'http://172.17.0.5:4000/python/jjcadpy?name=1',
         pnus
     )
-    // console.log(res.data)
+    console.log(res.data)
     ctx.body = res.data
 })
 
