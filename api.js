@@ -1,6 +1,8 @@
 import Router from 'koa-router'
-import { executeQ } from './util'
 import Axios from 'axios'
+
+import { executeQ } from './util'
+import np_addr from './np_addr'
 
 const api = new Router()
 
@@ -27,7 +29,7 @@ api.post('/download', async ctx => {
     // const pnus = ['1168010600109450010', '1168010600109480000']
     const pnus = ctx.request.body
     const res = await Axios.post(
-        'http://172.17.0.5:4000/python/jjcadpy?name=1',
+        `http://${np_addr}:4000/python/jjcadpy?name=1`,
         pnus
     )
     console.log(res.data)
